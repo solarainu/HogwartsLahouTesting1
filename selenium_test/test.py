@@ -12,7 +12,9 @@ class TestActionChain():
     def setup(self):
         # chrome_option = webdriver.ChromeOptions()
         # chrome_option.debugger_address = "127.0.0.1:9222"
-        self.driver = webdriver.Chrome()
+        opt = webdriver.ChromeOptions()
+        opt.add_argument('disable-infobars')
+        self.driver = webdriver.Chrome(options=opt)
         self.driver.implicitly_wait(5)
 
     def teardown(self):
@@ -26,6 +28,11 @@ class TestActionChain():
         #     json.dump(cookies,f)
         # self.driver.find_element_by_css_selector('[href="/t/topic/1296/5"]').click()
         self.driver.get("https://www.baidu.com/")
+        # time.sleep(3)
+        element = self.driver.find_element_by_css_selector('#u1 > a[name="tj_settingicon"]')
+        # #element = self.driver.find_element_by_xpath('//*[@id="s_mp"]/area')
+        a = element.get_attribute('title')
+        print(a)
 
         # self.driver.find_element_by_css_selector('#kw').send_keys("测试")
         # self.driver.find_element_by_css_selector('#su').click()
@@ -33,10 +40,10 @@ class TestActionChain():
         # time.sleep(3)
         # self.driver.find_element_by_xpath('//*[@id="page"]/a[1]/span[2]').click()
 
-        action = ActionChains(self.driver)
-        element = self.driver.find_element_by_css_selector('a[href="http://www.baidu.com/gaoji/preferences.html"][name="tj_settingicon"]')
-        action.move_to_element(element).perform()  
-        self.driver.find_element_by_css_selector('.pfhover').click()
+        # action = ActionChains(self.driver)
+        # element = self.driver.find_element_by_css_selector('a[href="http://www.baidu.com/gaoji/preferences.html"][name="tj_settingicon"]')
+        # action.move_to_element(element).perform()
+        # self.driver.find_element_by_css_selector('.pfhover').click()
         # self.driver.find_element_by_css_selector('[href="//www.baidu.com/gaoji/advanced.html"]').click()
         # with open("cookie.txt") as f:
         #     cookies = json.load(f)
